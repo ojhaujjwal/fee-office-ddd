@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\FeeOffice\Domain\Command;
 
-use Prooph\Common\Messaging\Command;
-use Prooph\Common\Messaging\PayloadTrait;
+use App\Core\Domain\AbstractDomainCommand;
 
-final class OccupyApartment extends Command
+final class OccupyApartment extends AbstractDomainCommand
 {
-    use PayloadTrait;
 }

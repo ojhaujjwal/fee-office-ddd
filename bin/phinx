@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+export PHINX_DBHOST=${APP_DBHOST}
+export PHINX_DBUSER=${APP_DBUSER}
+export PHINX_DBPASS=${APP_DBPASS}
+export PHINX_DBPORT=${APP_DBPORT}
+export PHINX_DBNAME=${APP_DBNAME}
+
+exec ./vendor/bin/phinx $@

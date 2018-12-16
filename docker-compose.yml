@@ -1,0 +1,85 @@
+version: '2'
+services:
+
+    # Application container
+    php:
+        build: .
+        restart: unless-stopped
+        volumes:
+            - ./:/server/http
+        ports:
+            - "80:80"
+            - "443:443"
+        links:
+            - postgres
+            - mongodb
+            - redis
+        environment:
+            - DEBUG=true
+            - APP_DBHOST=${APP_DBHOST}
+            - APP_DBUSER=${APP_DBUSER}
+            - APP_DBPASS=${APP_DBPASS}
+            - APP_DBPORT=${APP_DBPORT}
+            - APP_DBNAME=${APP_DBNAME}
+            - ELASTIC_HOST=${ELASTIC_HOST}
+
+    #python:
+        #image: python:3.6
+        #environment:
+          #- DEBUG: 'true
+          #- PORT: '8080'
+        #volumes:
+          #- ./:/server/http
+        #links:
+            #- postgres
+            #- mongodb
+            #- redis
+        #ports:
+          #- "8080:8080"
+
+    #go:
+        #image: golang:1.8-alpine
+        #ports:
+            #- "80:8080"
+        #links:
+            #- postgres
+            #- mongodb
+            #- redis
+        #environment:
+            #DEBUG: 'true'
+            #PORT: '8080'
+
+    postgres:
+        image: onjin/alpine-postgres:9.5
+        restart: unless-stopped
+        ports:
+            - "5432:5432"
+        environment:
+            LC_ALL: C.UTF-8
+            POSTGRES_USER: fee_office
+            POSTGRES_PASSWORD: fee_office
+            POSTGRES_DB: fee_office
+
+    mongodb:
+        image: mvertes/alpine-mongo:3.2.3
+        restart: unless-stopped
+        ports:
+            - "27017:27017"
+
+    redis:
+        image: sickp/alpine-redis:3.2.2
+        restart: unless-stopped
+        ports:
+            - "6379:6379"
+
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:6.4.3
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        environment:
+            - discovery.type=single-node
+        ulimits:
+            memlock:
+                soft: -1
+                hard: -1

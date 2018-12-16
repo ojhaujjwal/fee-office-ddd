@@ -1,0 +1,6 @@
+/vendor
+.php_cs.cache
+/phpstan-phpqa.neon
+/build
+/.env
+/logs

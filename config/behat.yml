@@ -1,0 +1,7 @@
+default:
+  suites:
+    building:
+      contexts:
+      - 'Specification\FeeOffice\AddApartmentToBuildingSpec'
+      paths:
+      - feature/add-apartment-to-building.feature

@@ -1,0 +1,13 @@
+#!/usr/bin/env sh
+
+set -eu # see http://jvns.ca/blog/2017/03/26/bash-quirks/
+
+if [ ! -f .env ]; then
+    cp env-dev-example .env
+fi
+
+docker-compose up -d
+sleep 2
+
+docker-compose exec php sh -c "composer install"
+docker-compose exec php sh -c "bin/phinx migrate"

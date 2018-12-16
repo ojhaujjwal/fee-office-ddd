@@ -1,0 +1,6 @@
+APP_DBHOST=postgres
+APP_DBUSER=fee_office
+APP_DBPASS=fee_office
+APP_DBPORT=5432
+APP_DBNAME=fee_office
+ELASTIC_HOST=elasticsearch

@@ -34,7 +34,7 @@ final class BuildingName implements ValueObjectInterface
         return $this->value;
     }
 
-    public function sameValueAs(ValueObjectInterface $object): bool
+    public function sameValueAs($object): bool
     {
         return $object instanceof self && $this->value === $object->toString();
     }

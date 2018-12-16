@@ -7,7 +7,7 @@ namespace App\FeeOffice\Domain\Model\Entrance;
 use App\Core\Domain\ValueObjectInterface;
 use Assert\Assertion;
 
-final class Address
+final class Address implements ValueObjectInterface
 {
     /**
      * @var string
@@ -34,7 +34,7 @@ final class Address
         return $this->value;
     }
 
-    public function sameValueAs(ValueObjectInterface $object): bool
+    public function sameValueAs($object): bool
     {
         return $object instanceof self && $this->value === $object->toString();
     }

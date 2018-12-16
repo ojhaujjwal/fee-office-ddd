@@ -17,3 +17,8 @@ Feature: App Apartment
     When a vacant apartment with occupied apartment attributes is added to the building
     Then it should raise that some attributes are unnecessary
 
+  Scenario: Adding apartment with just the necessary mandatory attributes
+    Given there is a building with entrances
+    And there are mandatory attributes along with occupied apartment attributes
+    When a vacant apartment with mandatory apartment attributes is added to the building
+    Then the apartment should be added to the building

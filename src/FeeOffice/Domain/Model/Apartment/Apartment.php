@@ -62,8 +62,8 @@ final class Apartment extends AggregateRoot implements EntityInterface
         AttributesCollection $allAttributes
     ): self {
         foreach ($attributeValues as $attributeId => $value) {
-            $id = AttributeId::fromString($attributeId);
-            $attribute = $allAttributes->find($id);
+            $attributeId = AttributeId::fromString($attributeId);
+            $attribute = $allAttributes->find($attributeId);
             $attribute->assertValueValidity($value);
         }
         $allAttributes->assertMandatoryAttributesPresence(

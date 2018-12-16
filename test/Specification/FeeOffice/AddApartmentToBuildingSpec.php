@@ -75,8 +75,6 @@ final class AddApartmentToBuildingSpec extends AbstractAggregateSpec implements 
      */
     public function apartmentWithoutAnyAttributeIsAdded()
     {
-        $this->apartment = null;
-        $this->lastException = null;
         try {
             $this->apartment = Apartment::addToBuilding(
                 $this->apartmentId,
@@ -113,8 +111,6 @@ final class AddApartmentToBuildingSpec extends AbstractAggregateSpec implements 
      */
     public function vacantApartmentWithOccupiedApartmentAttributesIsAdded()
     {
-        $this->apartment = null;
-        $this->lastException = null;
         try {
             $this->apartment = Apartment::addToBuilding(
                 $this->apartmentId,
@@ -142,10 +138,28 @@ final class AddApartmentToBuildingSpec extends AbstractAggregateSpec implements 
     }
 
     /**
+     * @Then a vacant apartment with mandatory apartment attributes is added to the building
+     */
+    public function vacantApartmentWithMandatoryApartmentAttributesIsAdded()
+    {
+        $this->apartment = Apartment::addToBuilding(
+            $this->apartmentId,
+            ApartmentNumber::fromString('AN1'),
+            $this->buildingId,
+            $this->entranceNumber,
+            new AttributeValuesMap(
+                AttributeValue::forAttribute(Attribute::area(), 1500)
+            ),
+            $this->attributes
+        );
+    }
+
+    /**
      * @Then the apartment should be added to the building
      */
     public function apartmentShouldBeAddedToBuilding()
     {
+        Assert::assertNull($this->lastException);
         $events = $this->popRecordedEvents($this->apartment);
 
         Assert::assertCount(1, $events);

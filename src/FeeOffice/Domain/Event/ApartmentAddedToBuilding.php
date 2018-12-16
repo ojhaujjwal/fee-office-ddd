@@ -52,7 +52,7 @@ final class ApartmentAddedToBuilding extends AggregateChanged
     {
         $attributeValues = [];
         foreach ($this->payload['attributeValues'] as $attributeId => $value) {
-            $attributeValues = new AttributeValue(AttributeId::fromString($attributeId), $value);
+            $attributeValues[] = new AttributeValue(AttributeId::fromString($attributeId), $value);
         }
 
         return new AttributeValuesMap(...$attributeValues);

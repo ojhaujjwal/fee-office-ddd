@@ -18,18 +18,11 @@ return (new ConfigAggregator([
         'environment' => getenv('HF_ENVIRONMENT') ?: 'development',
         'debug' => 'development' === (getenv('HF_ENVIRONMENT') ?: 'development'),
 
-        // Hard-coding basic auth credentials
-        // this is just a simple authentication demonstration for the test
-        // not recommended for a production application
-        'authentication_credentials' => [
-            'username1' => 'password1',
-            'username2' => 'password2',
-        ],
-
         'elastic' => [
             'hosts' => explode(',', getenv('ELASTIC_HOST')),
         ],
     ]),
     App\Core\ConfigProvider::class,
-    App\FeeOffice\ConfigProvider::class,
+    App\ApartmentManagement\ConfigProvider::class,
+    App\ContactAdministration\ConfigProvider::class,
 ]))->getMergedConfig();

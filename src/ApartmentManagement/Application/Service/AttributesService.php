@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\FeeOffice\Application\Service;
+namespace App\ApartmentManagement\Application\Service;
 
 
 final class AttributesService
